@@ -19,7 +19,7 @@ simple utility for RSA/AES encryption and decryption.
     ```
 1. generate RSA key pair: id_rsa (priviate key) and  id_rsa.pub (public key)
     ```
-    ssh-keygen -t rsa -C
+    ssh-keygen -t rsa -C "your-comments"
     ls ~/.ssh
     $ authorized_keys  id_rsa  id_rsa.pub  known_hosts
     ```

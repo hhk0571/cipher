@@ -63,18 +63,28 @@ def main():
         '''),
         epilog=textwrap.dedent('''\
         Examples of usage:
-            1. encryption using default private key
-                echo abcd | %(prog)s rsa-e > encrypted_text
-                cat a.txt | %(prog)s rsa-e > encrypted_text
+            1. RSA
+                1. encryption using default private key
+                $ echo abcd | ./%(prog)s rsa-e > encrypted_text
+                $ cat a.txt | ./%(prog)s rsa-e > encrypted_text
 
-            2. encryption using specific private/public key
-                echo abcd | %(prog)s rsa-e -k ./id_rsa.pub > encrypted_text
+                2. encryption using specific private/public key
+                $ echo abcd | ./%(prog)s rsa-e -k ./id_rsa.pub > encrypted_text
 
-            3. decryption using default private key
-                cat encrypted_text | %(prog)s rsa-d
+                3. decryption using default private key
+                $ cat encrypted_text | ./%(prog)s rsa-d
 
-            4. decryption using specific private key
-                cat encrypted_text | %(prog)s rsa-d -k ./id_rsa
+                4. decryption using specific private key
+                $ cat encrypted_text | ./%(prog)s rsa-d -k ./id_rsa
+            2. AES
+                1. encrypt
+                $ echo abcd | ./%(prog)s aes-e --password 12345678
+                LwkjmQ7Vg8fRB01NFk7RrA==
+
+                2. decrypt
+                $ echo LwkjmQ7Vg8fRB01NFk7RrA== | ./%(prog)s aes-d --password 12345678
+                abcd
+
         ''')
         )
     parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.1')

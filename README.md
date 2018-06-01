@@ -1,12 +1,12 @@
-simple TCP Server/Client model to simulate ssh
+simple utility for RSA/AES encryption and decryption
 ==============================
 
 Table of Contents
 + [porpuse](#porpuse)
 + [preparation](#preparation)
 + [example](#example)
-    + [RSA](#RSA)
-    + [AES](#AES)
+    + [RSA](#rsa)
+    + [AES](#aes)
 
 ## porpuse
 simple utility for RSA/AES encryption and decryption.
@@ -69,4 +69,12 @@ abcd
 ```
 
 ### AES
-TBD
+``` bash
+# encrypt
+$ echo abcd | ./cipher.py aes-e --password 12345678
+LwkjmQ7Vg8fRB01NFk7RrA==
+
+# decrypt
+$ echo LwkjmQ7Vg8fRB01NFk7RrA== | ./cipher.py aes-d --password 12345678
+abcd
+```

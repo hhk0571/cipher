@@ -33,16 +33,19 @@ simple utility for RSA/AES encryption and decryption.
 ### RSA
 #### encryption using default public key (~/.ssh/id_rsa.pub)
 ``` bash
-# encrypt string from pipe
+# encrypt string
 $ echo abcd | ./cipher.py rsa-e
 lRMjlpn0DMd1yBAPz888A+dxsBy6dJ6IjIPe5h+sZ/Hwgu+8z8a75iEJabYEsFFsi3e11ffB0pKikMCPY+NqknqkRz6eQBaM9AMrgDkI088L81mTD4YT+LCgGWqZvDA+xLy4sSkx+B78ASVEWYAWwDxra3A/HJ/WQE+TR05rZq7ufcbY7b5aztVNjFYvv1aiAyjd6KQl6bzBdD2uJlfinKkgnBKdeciePKI3pNmUVQlW7Cwiwy8QSqgx/ldNHekUt+IWdUN1AL1ISJpFFpOpTSXBgu+BSPqBxb5Erc4FRP0p8OiYdZ7tF8fj2RRLy2AlQkrDpH1AC/cRKOw33T+1wA==
 
-# encrypt string from pipe
+# encrypt string
 $ echo abcd | ./cipher.py rsa-e > encrypted_text
 
 # encrypt a file
 $ ./cipher.py rsa-e test.txt
 cw/3rm/jFvhLm3NBgxGXocze6KFdX3vcVVxiRLI7/dXWd2R0WyvuRpbZgPZ1Y8JxZWAF+vSDO9B5aOcodPCdARUAbWQqomy8rwzw8X7HNU7EHsEF6AIoNRrJYEG1ZWjURh8fn6i/85zTS4W7OnOxkYGrTt/lADDoFq3I1Q4BcZt/q+6E+KtOPGekxXTHC1jH3ZVntTo0xuc5puJpTkS0WuKLHlh+gMMv0USq3XUmRH3U8onS/1dMBSAfIEcfNHFBgDAnKwszDS/ABnJCt3wfdQpRq8o4gk+3yDFHX8HFTQWi6RAa9ClyFjdIvQK1gJDDmejEzGpe554loRPF733l6w==
+
+# encrypt a file to binary file
+$ ./cipher.py rsa-e test.txt -o encrypted.bin
 
 ```
 
@@ -64,17 +67,24 @@ $ echo abcd | cipher.py rsa-e -k ./id_rsa.pub > encrypted_text
 
 #### decryption using specific private key
 ``` bash
-$ cat encrypted_text | ./cipher.py rsa-d -k ./id_rsa
+$ ./cipher.py rsa-d -k ./id_rsa encrypted_text
 abcd
 ```
 
 ### AES
 ``` bash
-# encrypt
+# encrypt to base64 string
 $ echo abcd | ./cipher.py aes-e --password 12345678
-LwkjmQ7Vg8fRB01NFk7RrA==
+dYKyXAVZBj2aDTXGN50EMLUz4Ypj4+P8ePFUKurPfLe89uXZAQ==
 
-# decrypt
-$ echo LwkjmQ7Vg8fRB01NFk7RrA== | ./cipher.py aes-d --password 12345678
+# decrypt from base64 string
+$ echo dYKyXAVZBj2aDTXGN50EMLUz4Ypj4+P8ePFUKurPfLe89uXZAQ== | ./cipher.py aes-d --password 12345678
 abcd
+
+# encrypt to binary file
+$ ./cipher.py aes-e --password 12345678 input.file -o encrypted.file
+
+# decrypt from binary file
+$ ./cipher.py aes-d --password 12345678 encrypted.file -o decrypted.file
+
 ```
